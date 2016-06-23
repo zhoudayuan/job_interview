@@ -1,30 +1,70 @@
 #include <stdio.h>
 #include <string.h>
 
-char *str_cpy(char* dest, const char *src);
+char *str_cpy(char*	dest, const	char *src);
+char *str_n_cpy(char *dest,	const char *src, unsigned int n);
+char *str_n_cpy_0(char *dest,	const char *src, unsigned int n);
 
-
-int main()
+int	main()
 {
-    char array[50]={0};
-    printf("[%s:%d] ~~~~~~~~~ copy str ~~~~~~~~~\n", __FUNCTION__, __LINE__);
-    str_cpy(array, "zhoudayuan");
-	printf("[%s:%d] array=%s\n", __FUNCTION__, __LINE__, array);
-    return 0;
+	char array[50]={0};
+	printf("[%s:%d]	~~~~~~~~~ copy str ~~~~~~~~~\n", __FUNCTION__, __LINE__);
+	printf("[%s:%d]	array=%s\n", __FUNCTION__, __LINE__, str_cpy(array,	"zhoudayuan-abc"));
+	printf("[%s:%d]	array=%s\n", __FUNCTION__, __LINE__, str_n_cpy(array, "abcd", 10));
+	printf("[%s:%d]	array=%s\n", __FUNCTION__, __LINE__, str_n_cpy(array, "123456789", 10));
+	return 0;
 }
 
 
 /*
- *  ¿½±´×Ö·û´®
+ *	¿½±´×Ö·û´®
  */
-char *str_cpy(char* dest, const char *src)
+char *str_cpy(char*	dest, const	char *src)
 {
 	char *p=dest;
 	while ((*p++ = *src++) != '\0');
 	*p='\0';
-    return dest;
+	return dest;
 }
 
-// Î÷ÓÎÍ¥Ôº
-// ÐÇ¹âÒ« 80 25ºÅ
-// 
+
+
+/*
+ * °´×Å×Ö½Ú¿½±´×Ö·û´® µÚÒ»¸ö
+ */
+char *str_n_cpy(char *dest,	const char *src, unsigned int n)
+{
+	int	i;
+	char *p	= dest;
+
+	for	(i = 0;	i <	n; i++)
+	{
+		if (*src ==	'\0')
+		{
+			break;
+		}
+		*p++ = *src++;
+	}
+	*p = '\0';
+
+	return dest;
+}
+
+
+
+
+/*
+ * °´×Å×Ö½Ú¿½±´×Ö·û´® µÚ2¸ö
+ */
+char *str_n_cpy_0(char *dest,	const char *src, unsigned int n)
+{
+	char *p	= dest;
+	while ((n--) &&	(*src != '\0'))
+	{
+		*p++ = *src++;
+	}
+
+	p='\0';
+
+	return dest;
+}
